@@ -8,14 +8,37 @@ protocol CalendarDelegate: class {
     func calendarShouldChangeYear(_ calendar: Calendar) -> Bool
 }
 
+class RemindersCalendarDelegate: CalendarDelegate {
+    
+    var parentController: ReminderPresenting?
+    
+    func calendarShouldChangeYear(_ calendar: Calendar) -> Bool {
+        return true
+    }
+    
+    func calendar(_ calendar: Calendar, willDisplay year: Int) {
+        parentController?.yearChanged(to: year)
+    }
+    
+    func calendar(_ calendar: Calendar, didSelect date: Date) {
+        print("You selected \(date)")
+    }
+}
+
+protocol ReminderPresenting {
+    func yearChanged(to year: Int)
+}
+
 protocol CalendarDataSource {
+    
     func calendar(_ calendar: Calendar, eventsFor date: Date) -> [String]
     func calendar(_ calendar: Calendar, add event: String, to date: Date)
 }
 
 class RemindersCalendarDataSource: CalendarDataSource {
+    
     func calendar(_ calendar: Calendar, eventsFor date: Date) -> [String] {
-            return ["Organize sock drawer", "Take over the world"]
+        return ["Organize sock drawer", "Take over the world"]
     }
     
     func calendar(_ calendar: Calendar, add event: String, to date: Date) {
@@ -49,18 +72,16 @@ class Calendar {
             currentYear = year
         }
     }
-    
 }
 
-
-class Reminders: CalendarDelegate, CalendarDataSource {
+class Reminders: ReminderPresenting {
     
     var title = "Year: 2018"
     var calendar = Calendar()
     
     init() {
-        calendar.delegate = self
-        calendar.dataSource = self
+        calendar.delegate = RemindersCalendarDelegate()
+        calendar.dataSource = RemindersCalendarDataSource()
     }
     
     func calendar(_ calendar: Calendar, willDisplay year: Int) {
@@ -84,4 +105,24 @@ class Reminders: CalendarDelegate, CalendarDataSource {
         print("You're going to \(event) on \(date).")
     }
     
+    func yearChanged(to year: Int) { //ReminderPresenting
+        title = "Year: \(year)"
+    }
 }
+/*
+Notes:
+ 
+Calendar class has no knowledge of Reminders class - one is designed to be reusable in a variety of forms,
+and the other is a specific implementation to solve an app-specific problem. Both classes work together by using
+the CalendarDelegate & CalendarDataSource protocols, which is what we are using to loose coupling.
+As long as the protocol remains fixed, either of the two classes could be changed without breaking code.
+
+SOLID:
+ • The Single responsibility principle, where one class should be responsible for only one thing.
+ • The Open/closed principle, which states that software should be open for extension but closed for modification.
+ • The Liskov substitution principle, which allows a subclass to be used where one of its arent classes would be.
+ • The Interface segregation principle, which states that having multiple small interfaces is
+ better than having one large one.
+ • And the Dependency inversion principle, which states that it’s better to depend on
+ abstractions than concrete things.
+*/
