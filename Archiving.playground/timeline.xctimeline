@@ -3,7 +3,12 @@
    version = "3.0">
    <TimelineItems>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "file:///Users/bryan/Documents/GitHub/Design-Patterns-Swift/Archiving.playground#CharacterRangeLen=4&amp;CharacterRangeLoc=1342&amp;EndingColumnNumber=15&amp;EndingLineNumber=41&amp;StartingColumnNumber=11&amp;StartingLineNumber=41&amp;Timestamp=612555705.094734"
+         documentLocation = "file:///Users/bryan/Documents/GitHub/Design-Patterns-Swift/Archiving.playground#CharacterRangeLen=4&amp;CharacterRangeLoc=1342&amp;EndingColumnNumber=15&amp;EndingLineNumber=41&amp;StartingColumnNumber=11&amp;StartingLineNumber=41&amp;Timestamp=613281872.646004"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/bryan/Documents/GitHub/Design-Patterns-Swift/Archiving.playground#CharacterRangeLen=13&amp;CharacterRangeLoc=6419&amp;EndingColumnNumber=18&amp;EndingLineNumber=202&amp;StartingColumnNumber=5&amp;StartingLineNumber=202&amp;Timestamp=613281872.646135"
          selectedRepresentationIndex = "0"
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
